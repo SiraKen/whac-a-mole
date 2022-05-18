@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/src/reset.css" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="stage">
+        <div id="start">
+          <img src="/img/start.png" alt="start" />
+        </div>
+        <button class="mogura"></button>
+        <div id="result"><span>0</span>点</div>
+        <div id="timer">残り時間：<span id="time">30</span>秒</div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      let score = 0;
+      let count = 30;
+      let appearId, timer;
+      function getPosition() {
+        return {
+          left: Math.floor(Math.random() * 800),
+          top: Math.floor(Math.random() * 450),
+        };
+      }
+      function appear() {
+        appearId = setInterval(() => {
+          $(".mogura:first-child")
+            .clone()
+            .appendTo("#stage")
+            .css(getPosition())
+            .animate({ opacity: 1 }, 2000)
+            .animate(getPosition(), 7000);
+        }, 500);
+      }
+      $("#stage").on("click", ".mogura", function () {
+        $(this)
+          .css("background-position", "bottom")
+          .prop("disabled", true)
+          .stop(true, false)
+          .animate({ opacity: 0 }, 500, function () {
+            $(this).remove();
+          });
+        score += 100;
+        $("#result span").text(score);
+      });
+
+      $("#start").click(function () {
+        appear();
+        $(this).animate({ opacity: 0 }, 300, function () {
+          $(this).remove();
+        });
+        timer = setInterval(function () {
+          if (count <= 0) {
+            clearInterval(timer);
+            clearInterval(appearId);
+            $(".mogura").prop("disabled", true);
+            $("#result").show().animate({ opacity: 1 }, 300);
+          } else {
+            count--;
+            $("#timer span").text(count);
+          }
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

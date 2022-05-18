@@ -1,0 +1,57 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#stage {
+  margin: 100px auto 0;
+  width: 800px;
+  height: 450px;
+  background-color: #6d4c41;
+  position: relative;
+  overflow: hidden;
+}
+
+#start {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+  cursor: pointer;
+}
+
+#result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  display: none;
+  z-index: 10;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+#timer {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.mogura {
+  background: url("../img/mogura.png") center no-repeat;
+  width: 60px;
+  height: 60px;
+  border: none;
+  outline: none;
+  position: absolute;
+  left: 800px;
+  top: 450px;
+  opacity: 0;
+  cursor: pointer;
+}
